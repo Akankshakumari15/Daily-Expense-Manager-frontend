@@ -1,6 +1,5 @@
-import React from 'react'
-import React, { useEffect, useState, useCallback } from "react";
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState, useCallback  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
