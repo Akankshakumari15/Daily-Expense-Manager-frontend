@@ -16,7 +16,7 @@ const ExpenseReport = () => {
         if (!userId) {
             navigate('/login')
         }
-    }, []);
+    }, [navigate, userId]);
 
 
     const handleSubmit = async (e) => {

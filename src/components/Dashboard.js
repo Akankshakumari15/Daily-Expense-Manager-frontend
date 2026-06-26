@@ -1,4 +1,5 @@
 import React from 'react'
+import React, { useEffect, useState, useCallback } from "react";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
@@ -35,9 +36,9 @@ const Dashboard = () => {
             navigate('/login')
         }
         fetchExpenses(userId);
-    }, []);
+    }, [navigate, userId, fetchExpenses]);
 
-    const fetchExpenses = async (userId) => {
+    const fetchExpenses = useCallback(async (userId) => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/manage_expense/${userId}`);
             if (!response.ok) {
@@ -50,7 +51,7 @@ const Dashboard = () => {
             console.error("Error fetching expenses!", error)
         }
 
-    };
+    },[]);
 
     const calculateTotals = (data) => {
         const today = new Date();
