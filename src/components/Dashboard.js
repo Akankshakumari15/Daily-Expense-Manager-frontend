@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState, useCallback  } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -29,14 +29,6 @@ const Dashboard = () => {
             borderWidth: 1,
         },],
     };
-
-    useEffect(() => {
-        if (!userId) {
-            navigate('/login')
-        }
-        fetchExpenses(userId);
-    }, [navigate, userId, fetchExpenses]);
-
     const fetchExpenses = useCallback(async (userId) => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/manage_expense/${userId}`);
@@ -50,7 +42,15 @@ const Dashboard = () => {
             console.error("Error fetching expenses!", error)
         }
 
-    },[]);
+    }, []);
+    useEffect(() => {
+        if (!userId) {
+            navigate('/login')
+        }
+        fetchExpenses(userId);
+    }, [navigate, userId, fetchExpenses]);
+
+
 
     const calculateTotals = (data) => {
         const today = new Date();
@@ -154,7 +154,7 @@ const Dashboard = () => {
             </div>
 
             {/* pie chart */}
-            <div className='my-5 ' style={{ width: '400px', height: '400px', margin:'auto' }}>
+            <div className='my-5 ' style={{ width: '400px', height: '400px', margin: 'auto' }}>
                 <h4 className='text-center'>
                     Expense Distribution
                 </h4>
